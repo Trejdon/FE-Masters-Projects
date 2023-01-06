@@ -1,0 +1,201 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--header-background);
+    font-family: "Open Sans";
+}
+
+:root {
+    --header-background: #43281C;
+    --logo-tan: #FAF2BF;
+    --card-tan: #EDE0D4;
+    --font-tan: #A17957;
+    --button-tan: #DEB993;
+    --main-background: #F0F0F0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--header-background);
+    color: var(--logo-tan);
+    font-weight: 700;
+    font-size: 10px;
+    padding: 15px;
+}
+
+.logo {
+    max-height: 25px;
+    margin-right: 5px;
+}
+
+main {
+    display: grid;
+    grid-template-areas: "items customer"
+    ". ."
+    "total total"
+    "button button";
+    background-color: var(--main-background);
+    border-radius: 5px;
+    padding-top: 25px;
+    font-size: 14px;
+}
+
+.cost {
+    grid-area: total;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 25%;
+    margin: 100px auto 0;
+}
+
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.item-list {
+    grid-area: items;
+    height: 77%;
+}
+
+.customer-info {
+    grid-area: customer;
+}
+
+.card {
+    background-color: var(--card-tan);
+    border-radius: 5px;
+    margin: 30px;
+    padding: 5px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.section-title {
+    color: var(--font-tan);
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 5px 10px 10px 10px;
+}
+
+.option {
+    color: var(--font-tan);
+    font-weight: 400;
+    font-size: 12px;
+    list-style: none;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+    margin: 0px 10px;
+    border-bottom: 2px solid var(--button-tan);
+    padding: 20px 30px 20px 0px;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+p {
+    margin: 0;
+}
+
+.quantity {
+    display: inline;
+
+}
+
+.item-name, .price {
+    display: inline;
+    font-weight: 700;
+}
+
+.line-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.spaced-apart {
+    display: flex;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    padding: 0 10px;
+}
+
+ul {
+    margin: 0;
+    padding-inline-start: 26px;
+}
+
+.button-container {
+    grid-area: button;
+    display: flex;
+    justify-content: center;
+}
+
+.order-btn {
+    border: none;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    background-color: var(--button-tan);
+    border-radius: 50px;
+    width: 95%;
+    padding: 10px;
+    margin: 15px 75px;
+}
+
+.input-group {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.text-input {
+    border: 2px solid var(--font-tan);
+    background-color: var(--card-tan);
+    width: 94%;
+    padding: 8px;
+    margin: 15px;
+    border-radius: 50px;
+}
+
+.ccv-input {
+    border: 2px solid var(--font-tan);
+    background-color: var(--card-tan);
+    width: 35%;
+    margin: 15px;
+    padding: 8px;
+    border-radius: 50px;
+}
+
+.input-label {
+    background-color: var(--card-tan);
+    color: var(--font-tan);
+    font-size: 12px;
+    position: absolute;
+    left: 30px;
+    top: 7px;
+    padding: 0 2px;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.customer-name {
+    margin-bottom: 20px;
+}
