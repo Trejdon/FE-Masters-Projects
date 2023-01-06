@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./coffee.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="https://btholt.github.io/complete-intro-to-web-dev-v3/images/coffee_masters_logo.png" alt="coffee masters logo">
+            <p>Coffee Masters</p>
+        </header>
+        <main>
+            <section class="item-list card">
+                <h4 class="section-title">Items</h4>
+                <div class="item">
+                    <div class="line-item">
+                        <p class="quantity">1x</p>
+                        <div class="spaced-apart">
+                            <p class="item-name">Cappuccino</p>
+                            <p class="price">$3.35</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="option">Lite foam</li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <div class="line-item">
+                        <p class="quantity">1x</p>
+                        <div class="spaced-apart">
+                            <p class="item-name">Cappuccino</p>
+                            <p class="price">$3.85</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="option">Lite milk</li>
+                        <li class="option">Double espresso</li>
+                    </ul>
+                </div>
+                <div class="item">
+                    <div class="line-item">
+                        <p class="quantity">1x</p>
+                        <div class="spaced-apart">
+                            <p class="item-name">Croissant</p>
+                            <p class="price">$2.45</p>
+                        </div>
+                    </div>
+                    <ul>
+                        <li class="option">Butter</li>
+                    </ul>
+                </div>
+            </section>
+            <div class="customer-info">
+                <section class="customer-name card">
+                    <h4 class="section-title">Name</h4>
+                    <div class="input-group">
+                        <label for="name" class="input-label">Name for order</label>
+                        <input type="text" class="text-input" id="name">
+                    </div>
+                </section>
+                <section class="payment card">
+                    <h4 class="section-title">Payment</h4>
+                    <div class="card-container">
+                        <div class="input-group">
+                            <label for="card-number" class="input-label">Card number</label>
+                            <input type="text" class="text-input" id="card-number">
+                        </div>
+                        <div class="input-group">
+                            <label for="ccv-number" class="input-label">CCV number</label>
+                            <input type="text" class="ccv-input" id="ccv-number">
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <section class="cost">
+                <div class="spaced-apart mb-10">
+                    <p>Subtotal:</p>
+                    <p>$9.65</p>
+                </div>
+                <div class="spaced-apart mb-20">
+                    <p>Tax:</p>
+                    <p>$0.82</p>
+                </div>
+                <div class="spaced-apart mb-10">
+                    <p class="price">Total:</p>
+                    <p class="price">$10.47</p>
+                </div>
+            </section>
+            <div class="button-container">
+                <button class="order-btn">Place order</button>
+            </div>
+        </main>
+    </body>
+</html>
