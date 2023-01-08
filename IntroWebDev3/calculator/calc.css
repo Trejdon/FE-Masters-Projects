@@ -1,0 +1,88 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    
+}
+
+.grid-container {
+    display: grid;
+    background-color: black;
+    gap: 4px;
+    grid-template-areas:
+        "result"
+        "row1"
+        "row2"
+        "row3"
+        "row4"
+        "row5"
+    ;
+    width: 500px;
+    padding: 4px;
+}
+
+.result {
+    display: flex;
+    height: 100px;
+    color: white;
+    font-size: 40px;
+    font-family: monospace;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn {
+    border: none;
+    height: 120px;
+    width: 120px;
+    font-size: 42px;
+    text-align: center;
+}
+
+.btn:hover {
+    filter: brightness(125%);
+}
+
+.btn:active {
+    filter: brightness(75%)
+}
+
+.btn-orange {
+    background-color: #DF974B;
+    color: white;
+}
+
+.dbl-btn {
+    width: 244px;
+}
+
+.trpl-btn {
+    width: 368px;
+}
+
+.result {
+    grid-area: result;
+}
+
+.row-1 {
+    grid-area: row1;
+}
+
+.row-2 {
+    grid-area: row2;
+}
+
+.row-3 {
+    grid-area: row3;
+}
+
+.row-4 {
+    grid-area: row4;
+}
+
+.row-5 {
+    grid-area: row5;
+}
