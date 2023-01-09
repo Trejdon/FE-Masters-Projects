@@ -19,7 +19,6 @@ const clearDisplay = () => {
 
 const handleNumberButton = (e) => {
     const selected = e.target.innerText;
-    console.log(`You clicked on a number button: ${selected}`)
 
     if (display === "0") {
         display = selected;
@@ -31,7 +30,7 @@ const handleNumberButton = (e) => {
 }
 const handleFunctionButton = (e) => {
     const selected = e.target.innerText;
-    console.log(`You clicked on a function button: ${e.target.innerText}`)
+    
     if(mathStrings.includes(selected) && display !== "0") {
         numberArray.push(Number.parseInt(display));
         arithmeticArray.push(selected);
@@ -56,28 +55,24 @@ const mult = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 const evaluate = (numbers, symbols) => {
-    let result;
-
-    console.log({ numbers, symbols })
-
+    let result = 0;
     for (let i = 0; i < (numbers.length - 1); i++){
-        let firstNumber;
-        let secondNumber = numbers[i+1];
-        if (i === 0) {
-            firstNumber = numbers[i];
-        } else {
-            firstNumber = result;
-        }
-        console.log(symbols[i])
-        console.log(firstNumber, secondNumber)
+        const firstNumber = (i === 0) ? numbers[i] : result;
+        const secondNumber = numbers[i+1];
         switch (symbols[i]) {
             case '+':
                 result = add(firstNumber, secondNumber);
+                break;
             case '-':
                 result = sub(firstNumber, secondNumber);
+                break;
+            case '×':
+                result = mult(firstNumber, secondNumber);
+                break;
+            case '÷':
+                result = divide(firstNumber, secondNumber);
+                break;
         }
-
-        console.log({ result, i})
     }
 
     return result;
