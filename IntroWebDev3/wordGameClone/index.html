@@ -4,71 +4,78 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.cdnfonts.com/css/open-sans" rel="stylesheet">
     <link rel="stylesheet" href="./game.css">
-    <title>Word Game Clone</title>
+    <title>Jerksdle - A Word Game for Jerks</title>
 </head>
 <body>
     <header>
-        Word Game Clone
+        Jerksdle
     </header>
     <main>
-        <div class="loader">Loader</div>
+        <div class="loader hidden">
+            <div class="spinning">🥎</div>
+        </div>
         <section class="board">
-            <div id="guess-one">
-                <form class="guess" method="" action="">
-                    <input maxlength="1" class="letter first-row" id="first-one"> 
-                    <input maxlength="1" class="letter first-row" id="first-two"> 
-                    <input maxlength="1" class="letter first-row" id="first-three"> 
-                    <input maxlength="1" class="letter first-row" id="first-four"> 
-                    <input maxlength="1" class="letter first-row" id="first-five"> 
-                </form>
+            <div class="guess" id="guess-one">
+                    <div class="letter" id="1-1"></div>
+                    <div class="letter" id="1-2"></div>
+                    <div class="letter" id="1-3"></div>
+                    <div class="letter" id="1-4"></div>
+                    <div class="letter" id="1-5"></div>
             </div>
-            <div id="guess-two">
-                <form class="guess" method="" action="">
-                    <input maxlength="1" class="letter second-row" id="second-one"> 
-                    <input maxlength="1" class="letter second-row" id="second-two"> 
-                    <input maxlength="1" class="letter second-row" id="second-three"> 
-                    <input maxlength="1" class="letter second-row" id="second-four"> 
-                    <input maxlength="1" class="letter second-row" id="second-five"> 
-                </form>
+            <div class="guess" id="guess-two">
+                    <div class="letter" id="2-1"></div>
+                    <div class="letter" id="2-2"></div>
+                    <div class="letter" id="2-3"></div>
+                    <div class="letter" id="2-4"></div>
+                    <div class="letter" id="2-5"></div>
             </div>
-            <div id="guess-three">
-                <form class="guess" method="" action="">
-                    <input maxlength="1" class="letter third-row" id="third-one"> 
-                    <input maxlength="1" class="letter third-row" id="third-two"> 
-                    <input maxlength="1" class="letter third-row" id="third-three"> 
-                    <input maxlength="1" class="letter third-row" id="third-four"> 
-                    <input maxlength="1" class="letter third-row" id="third-five"> 
-                </form>
+            <div class="guess" id="guess-three">
+                    <div class="letter" id="3-1"></div>
+                    <div class="letter" id="3-2"></div>
+                    <div class="letter" id="3-3"></div>
+                    <div class="letter" id="3-4"></div>
+                    <div class="letter" id="3-5"></div>
             </div>
-            <div id="guess-four">
-                <form class="guess" method="" action="">
-                    <input maxlength="1" class="letter fourth-row" id="fourth-one"> 
-                    <input maxlength="1" class="letter fourth-row" id="fourth-two"> 
-                    <input maxlength="1" class="letter fourth-row" id="fourth-three"> 
-                    <input maxlength="1" class="letter fourth-row" id="fourth-four"> 
-                    <input maxlength="1" class="letter fourth-row" id="fourth-five"> 
-                </form>
+            <div class="guess" id="guess-four">
+                    <div class="letter" id="4-1"></div>
+                    <div class="letter" id="4-2"></div>
+                    <div class="letter" id="4-3"></div>
+                    <div class="letter" id="4-4"></div>
+                    <div class="letter" id="4-5"></div>
             </div>
-            <div id="guess-five">
-                <form class="guess" method="" action="">
-                    <input maxlength="1" class="letter fifth-row" id="fifth-one"> 
-                    <input maxlength="1" class="letter fifth-row" id="fifth-two"> 
-                    <input maxlength="1" class="letter fifth-row" id="fifth-three"> 
-                    <input maxlength="1" class="letter fifth-row" id="fifth-four"> 
-                    <input maxlength="1" class="letter fifth-row" id="fifth-five"> 
-                </form>
+            <div class="guess" id="guess-five">
+                    <div class="letter" id="5-1"></div>
+                    <div class="letter" id="5-2"></div>
+                    <div class="letter" id="5-3"></div>
+                    <div class="letter" id="5-4"></div>
+                    <div class="letter" id="5-5"></div>
             </div>
-            <div id="guess-six">
-                <form class="guess" method="" action="">
-                    <input maxlength="1" class="letter final-row" id="final-one"> 
-                    <input maxlength="1" class="letter final-row" id="final-two"> 
-                    <input maxlength="1" class="letter final-row" id="final-three"> 
-                    <input maxlength="1" class="letter final-row" id="final-four"> 
-                    <input maxlength="1" class="letter final-row" id="final-five"> 
-                </form>
+            <div class="guess" id="guess-six">
+                    <div class="letter" id="6-1"></div>
+                    <div class="letter" id="6-2"></div>
+                    <div class="letter" id="6-3"></div>
+                    <div class="letter" id="6-4"></div>
+                    <div class="letter" id="6-5"></div>
+            </div>
+        </section>
+        <section>
+            <div class="winner">
+                <img class="rounded" src="./images/coach.jpeg" alt="Terco Rivas">
+                <div>Coach says: "It's Modelo time fool 🍻"</div>
+            </div>
+            <div class="loser">
+                <img class="rounded" src="./images/coach.jpeg" alt="Terco Rivas">
+                <div>Coach says: "What a loser!  The word was <span id="secret"></span>!"</div>
             </div>
         </section>
     </main>
+    <footer>
+        <div class="footer-content">
+            <div>Made with 💚 by <a href="https://github.com/Trejdon" target="_blank">Trejdon</a></div>
+        </div>
+    </footer>
+    <script src="./game.js"></script>
 </body>
 </html>

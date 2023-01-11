@@ -3,11 +3,13 @@ let currentGuess = 1;
 let currentLetter = 1;
 let currentTile = document.getElementById(`${currentGuess}-${currentLetter}`)
 let currentWord;
+let gameOver = false;
 
 const BACKSPACE = "Backspace";
 const ENTER = "Enter";
 const SECRETURL = "https://words.dev-apis.com/word-of-the-day";
 const VALIDATE_URL = "https://words.dev-apis.com/validate-word";
+const loserSecret = document.getElementById("secret");
 
 const isLetter = (character) => {
     return /^[a-zA-Z]$/.test(character)
@@ -20,8 +22,8 @@ const setLoading = (isLoading) => {
 
 const gatherCurrentWord = () => {
     let word = "";
-    for (let i = 1; i < 6; i++){
-        word += document.getElementById(`${currentGuess}-${i}`).innerText;
+    for (let i = 0; i < 5; i++){
+        word += document.getElementById(`${currentGuess}-${i+1}`).innerText;
     }
     currentWord = word;
 }
@@ -44,27 +46,33 @@ const createMap = (wordArray) => {
         }
     }
 
-    return result;
-}
-
-const evaluateCharacter = (character, idx) => {
-    if (secretWord.charAt(idx) === character) {
-        return "correct";
-    } else if (secretWord.includes(character)) {
-        return "present";
-    } else {
-        return "incorrect";
-    }
+    return characterCounts;
 }
 
 const evaluateWord = (word) => {
-    const result = [];
+    const result = ["incorrect", "incorrect", "incorrect", "incorrect", "incorrect"];
     const wordArray = word.split('')
+    const secretMap = createMap(secretWord);
 
-    wordArray.map((letter, idx) => {
-        const eval = evaluateCharacter(letter, idx);
-        result.push(eval)
-    })
+    // First pass, assign all correct
+    for(let i = 0; i < wordArray.length; i++) {
+        const letter = wordArray[i]
+        if (secretWord.charAt(i) === letter) {
+            result[i] = "correct";
+            secretMap[letter]--;
+        }
+    }
+
+    // // Second pass, assign the presents
+    for(let i = 0; i < wordArray.length; i++) {
+        const letter = wordArray[i]
+        if (secretWord.charAt(i) === letter) {
+            // handled in first pass
+        } else if (secretWord.includes(letter) && secretMap[letter] !== 0) {
+            result[i] = "present";
+            secretMap[letter]--;
+        }
+    }
 
     return result;
 }
@@ -87,10 +95,23 @@ const validateCurrentWord = async (word) => {
     const response = await fetch(VALIDATE_URL, { "method": "POST", "body": JSON.stringify({ word })});
     const responseObj = await response.json();
     setLoading(false);
-    return responseObj.validWord;;
+    return responseObj.validWord;
+}
+
+const markInvalidWord = () => {
+    for (let i = 0; i < 5; i++) {
+        document.getElementById(`${currentGuess}-${i+1}`).classList.remove("invalid")
+
+        setTimeout(() => {
+            document.getElementById(`${currentGuess}-${i+1}`).classList.add("invalid")
+        }, 50)
+    }
 }
 
 const handleKeyPress = async (event) => {
+    if (gameOver) {
+        return;
+    }
     if (isLetter(event.key)) {
         // set the current tile text
         currentTile.innerText = event.key
@@ -111,37 +132,34 @@ const handleKeyPress = async (event) => {
             currentTile.innerText = ""
         }
     } else if (event.key === ENTER) {
-        // If currentLetter = 5 and currentTile is not empty, validate the word 
         if (currentLetter === 5 && currentTile.innerText !== "") {
             // Gather the word from the current guess
             gatherCurrentWord();
-
-            // Set loading to indicate the guess is being validated
-
             // Validate the word
             const isValid = await validateCurrentWord(currentWord);
 
-            if(isValid) {
-                console.log("Word is valid")
-            } else {
-                console.log("Invalid word")
-            };
-            // Evaluate the guess word against the secret word
+            if(!isValid) {
+                markInvalidWord();
+                return;
+            }
+            
             const result = evaluateWord(currentWord);
             // Update the CSS classes of the current guess
             updateGuessClasses(result);
             // Win, lose, or guess again
             if(isCorrect(result)){
-                alert("You Win")
+                document.querySelector(".winner").style.display = "flex";
+                gameOver = true;
             } else if (currentGuess === 6){
-                alert(`What a Loser.  The word was ${secretWord}!`)
+                document.querySelector(".loser").style.display = "flex";
+                loserSecret.innerText = secretWord;
+                gameOver = true;
             } else {
                 currentGuess += 1;
                 currentLetter = 1;
                 currentWord = "";
                 currentTile = document.getElementById(`${currentGuess}-${currentLetter}`)
             }
-            // If incorrect, update the CSS classes of the current guess, setup the app for next guess if current guess is < 6
         }
     }
 }
