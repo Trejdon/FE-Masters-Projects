@@ -1,7 +1,7 @@
-const favoriteBooks = [];
-const GREAT = "great"
+const GREAT = "great";
+const BOOK_API = "https://some.url/api";
 
-// Three pillars: move add and print functions to Bookshelf class.
+// Exercise 2: move add and print functions to Bookshelf class.
 class Bookshelf {
     constructor(favoriteBooks) {
         this.favoriteBooks = favoriteBooks;
@@ -11,33 +11,40 @@ class Bookshelf {
             this.favoriteBooks.push(book)
         }
     }
-    printFavoriteBooks(bookList) {
+    // #Exercise 1: make sure there's no type accidental type coercion
+    printFavoriteBooks() {
         console.log("Favorite Book List")
-    console.log("=================")
-    for (let i = 0; i < bookList.length; i++){
-        const stringifiedBook = String(bookList[i])
-        console.log(`${i}: ${stringifiedBook}`)
-    }
+        console.log("=================")
+        for (let i = 0; i < this.favoriteBooks.length; i++){
+            const stringifiedBook = String(this.favoriteBooks[i])
+            console.log(`${i}: ${stringifiedBook}`)
+        }
     }
 }
 
-// define printFavoriteBook function
-// #Three pillars: make sure there's no type accidental type coercion
-const printFavoriteBooks = (bookList) => {
-    console.log("Favorite Book List")
-    console.log("=================")
-    for (let i = 0; i < bookList.length; i++){
-        const stringifiedBook = String(bookList[i])
-        console.log(`${i}: ${stringifiedBook}`)
-    }
+function loadBooks(bookshelf) {
+    fakeAjax(BOOK_API, function populateBookshelf(bookList) {
+        for(let book of bookList) {
+            bookshelf.addFavoriteBook(book)
+        }
+        bookshelf.printFavoriteBooks();
+    })
 
 }
 
-addFavoriteBook("A Song of Ice and Fire")
-addFavoriteBook("The Great Gatsby")
-addFavoriteBook("Crime & Punishment")
-addFavoriteBook("Great Expectations")
-addFavoriteBook("You Don't Know JS")
+function fakeAjax(url, cb) {
+    console.log(`Fetching data from: ${url}`)
+	setTimeout(function fakeLoadingDelay(){
+		cb([
+			"A Song of Ice and Fire",
+			"The Great Gatsby",
+			"Crime & Punishment",
+			"Great Expectations",
+			"You Don't Know JS"
+		]);
+	}, 1500);
+}
 
-// print out favorite books
-printFavoriteBooks(favoriteBooks)
+const myShelf = new Bookshelf([]);
+
+loadBooks(myShelf);
