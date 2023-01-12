@@ -69,47 +69,63 @@
     </body>
 
     <script type="text/javascript">
-
-
-        // TODO 1: Declare & assign variables pointing to the corresponding element(s)
+        // DONE 1: Declare & assign variables pointing to the corresponding element(s)
         // statement should be the "statement" div
         // optionButtons should be all the elements within the "options" div
         // explanation should be the "explanation" div
-
+        const statement = document.getElementById("statement");
+        const explanation = document.getElementById("explanation");
+        const optionsButtons = document.getElementById("options").children;
 
         // TODO 2: Declare & assign a variable called fact
         // Its value should be an object with a statement, true/false answer, and explanation 
-        
-
+        const fact = {
+            statement: "Unary operators must preceed their single operand",
+            answer: false,
+            explanation: "Unary operators (+, -, ++, --, ...) don't necessarily need to preceed their operands to function.  i++ and ++i are both valid, but do function in slightly different ways.",
+        }
         
         // TODO 3: Set the text of the statement element to the fact's statement
-
+        statement.innerText = fact.statement;
             
-
         // TODO 4: Declare disable & enable functions to set or remove the "disabled" attribute from a given button element
         // disable(button) should set the button element's attribute "disabled" to the value ""
         // enable(button) should remove the attribute "disabled" from the button element
-
-
+        const enable = (element) => element.removeAttribute("disabled")
+        const disable = (element) => element.setAttribute("disabled", "")
 
         // TODO 5: Declare an isCorrect function that compares a guess to the right answer
         // isCorrect(guess) should return true if the guess matches the fact's answer
-        
-
+        const isCorrect = (guess) => guess === fact.answer;
 
         // TODO 6A: Use a for loop to add a click event listener to each of the optionButtons
-                // TODO 6B: Within the event handler function, display the fact's explanation by setting the text of the explanation element
+        const setupListeners = () => {
+            for (let i = 0; i < optionsButtons.length; i++) {
+                optionsButtons[i].addEventListener("click", (event) => onButtonClick(event));
+            }
+        }
 
+        const onButtonClick = (event) => {
+            const { target } = event;
+            const { innerText: selection } = target;
 
-                // TODO 7: Within the event handler function, 
-                // Use a for loop to disable all the option buttons
+            // TODO 6B: Within the event handler function, display the fact's explanation by setting the text of the explanation element
+            explanation.innerText = fact.explanation;
 
+            // TODO 7: Within the event handler function, 
+            // Use a for loop to disable all the option buttons
+            for (let i = 0; i < optionsButtons.length; i++) {
+                disable(optionsButtons[i])
+            }
 
-                // TODO 8: Within the event handler function,
-                // Get the guessed value from the clicked button
-                // Use a conditional to compare the guess to the fact's answer
-                // and add the "correct"/"incorrect" class as appropriate
+            // TODO 8: Within the event handler function,
+            // Get the guessed value from the clicked button
+            // Use a conditional to compare the guess to the fact's answer
+            // and add the "correct"/"incorrect" class as appropriate
+            selection === fact.answer.toString() ? target.classList.add("correct") : target.classList.add("incorrect")
+        }
 
+        setupListeners();
         
     </script>
 </html>
