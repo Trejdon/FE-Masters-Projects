@@ -1,0 +1,94 @@
+/* variables declared here - these are the colors for our pages, as well as the font stacks and sizes. */
+:root {
+    --blackish: #162E25;
+    --grey: #665F5E;
+    --orange: #FFB041;
+    --hotterpink: #fa37fd;
+    --hotpink: #FE8CFF;
+    --teal: #54EAE8;
+    --white: #f7f8fa;
+    --font-size: 1.3rem;
+    --font-size-large: 4rem;
+    --mono: "Roboto Mono", monospace;
+    --sans: "Rubik", sans-serif;
+}
+
+/* Full page styles, apply defaults to everything first */
+/* border box model: https://css-tricks.com/box-sizing/ */
+html {
+    box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: var(--sans);
+    background-color: var(--blackish);
+    color: var(--white);
+    font-size: var(--font-size);
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+a {
+    color: var(--hotpink);
+}
+a:hover {
+    color: var(--hotterpink);
+    text-decoration: none;
+}
+/* End full page styles */
+
+/* Intro styles */
+#intro {
+    padding-bottom: 10rem;
+}
+
+#intro p {
+    font-size: 1rem;
+    /* Using a unit with line-height is a common mistake, no unit is proportional to the font-size */
+    line-height: 1.5;
+}
+
+#intro h2 {
+    font-size: var(--font-size-large);
+    font-weight: normal;
+}
+
+#intro .name {
+    font-family: var(--mono);
+}
+
+.name span {
+    font-family: var(--sans);
+    font-size: var(--font-size-large);
+    font-weight: bold;
+    color: var(--orange);
+    display: block;
+}
+
+/* Contact styles */
+#contact {
+    padding: 3rem 0;
+    background-color: var(--teal);
+    color: var(--blackish);
+    text-align: center;
+}
+
+#contact p {
+    display: inline-block;
+    width: 40%;
+
+}
+
+#contact a {
+    display: block;
+    padding-top: 2rem;
+}
