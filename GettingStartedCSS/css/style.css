@@ -3,8 +3,8 @@
     --blackish: #162E25;
     --grey: #665F5E;
     --orange: #FFB041;
-    --hotterpink: #fa37fd;
-    --hotpink: #FE8CFF;
+    --hotpink: #fa37fd;
+    --pink: #FE8CFF;
     --teal: #54EAE8;
     --white: #f7f8fa;
     --font-size: 1.3rem;
@@ -41,7 +41,7 @@ a {
     color: var(--hotpink);
 }
 a:hover {
-    color: var(--hotterpink);
+    color: var(--pink);
     text-decoration: none;
 }
 /* End full page styles */
@@ -79,18 +79,36 @@ a:hover {
     padding: 3rem 0;
     background-color: var(--teal);
     color: var(--blackish);
+}
+
+#contact div {
+    width: 400px;
     text-align: center;
+    margin: 0 auto;
 }
 
 #contact p {
-    display: inline-block;
-    width: 40%;
-
+    margin-bottom: 3rem;
 }
 
 #contact a {
     display: block;
     padding-top: 2rem;
+}
+
+#contact .button-orange {
+    margin: 0 auto;
+    width: 40%;
+    background-color: var(--orange);
+    color: var(--blackish);
+    padding: .5rem;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+#contact .button-orange:hover {
+    background-color: var(--hotpink);
+    color: var(--white);
 }
 
 nav {
@@ -146,4 +164,54 @@ nav [class*="fa-"] {
 nav h1 [class*="fa-"] {
     font-size: 100%;
     padding-right: .5rem;
+    color: rgba(68, 255, 0, 0.854)
+}
+
+.button {
+    background-color: var(--teal);
+    color: var(--blackish);
+    padding: .5rem;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: var(--orange);
+    color: var(--blackish);
+}
+
+footer {
+    max-width: 400px;
+    text-align: center;
+    margin: 1rem auto;
+}
+
+footer ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+footer [class*="fa-"] {
+    font-size: 200%;
+    color: var(--orange)
+}
+
+footer [class*="fa-"]:hover {
+    color: var(--teal);
+}
+
+@media (min-width: 810px) {
+    nav {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    nav li:first-child {
+        flex-basis: auto;
+        text-align: left;
+        margin-right: auto;
+    }
 }
