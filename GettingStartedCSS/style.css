@@ -92,3 +92,58 @@ a:hover {
     display: block;
     padding-top: 2rem;
 }
+
+nav {
+    font-family: var(--mono);
+    /* Nice trick to proportionally shrink the entire set of sizes */
+    font-size: 80%;
+    padding: 1rem;
+}
+
+nav h1 a {
+    font-family: var(--sans);
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+        /* The three most important flex properties */
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    /* Assigns a nice space in all elements */
+    gap: 2rem;
+}
+
+nav li:first-child {
+    /* Flex basis makes this take 100% of the width of the container */
+    flex-basis: 100%;
+    text-align: center;
+    /* Debugging trick, throw a border on it! */
+    /* border: 1px solid red; */
+}
+
+nav a {
+    color: var(--white);
+    text-decoration: none;
+    /* Normally a elements are spans, but for a nav
+        making them blocks work for a better UX
+    */
+    display: block;
+}
+nav a:hover,
+nav [class*="fa-"]:hover {
+    color: var(--orange)
+}
+
+nav [class*="fa-"] {
+    font-size: 150%;
+    color: var(--teal)
+}
+
+nav h1 [class*="fa-"] {
+    font-size: 100%;
+    padding-right: .5rem;
+}
