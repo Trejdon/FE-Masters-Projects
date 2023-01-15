@@ -48,7 +48,9 @@ a:hover {
 
 /* Intro styles */
 #intro {
-    padding-bottom: 10rem;
+    padding-bottom: 4rem 1rem 10rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 #intro p {
@@ -202,6 +204,12 @@ footer [class*="fa-"] {
 
 footer [class*="fa-"]:hover {
     color: var(--teal);
+}
+
+.gradient {
+    height: .5rem;
+    background: rgb(255,176,65);
+    background: linear-gradient(90deg, rgba(255,176,65,1) 0%, rgba(250,55,253,1) 100%);     
 }
 
 @media (min-width: 810px) {
