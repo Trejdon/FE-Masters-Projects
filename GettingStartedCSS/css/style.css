@@ -44,6 +44,12 @@ a:hover {
     color: var(--pink);
     text-decoration: none;
 }
+
+/* Neat trick to ensure the image always takes up full container space */
+img {
+    width: 100%;
+    max-height: 75%;
+}
 /* End full page styles */
 
 /* Intro styles */
@@ -210,6 +216,85 @@ footer [class*="fa-"]:hover {
     height: .5rem;
     background: rgb(255,176,65);
     background: linear-gradient(90deg, rgba(255,176,65,1) 0%, rgba(250,55,253,1) 100%);     
+}
+
+#projects {
+    background-color: var(--grey);
+    padding: 4rem 1rem;
+}
+
+#projects h2 {
+    font-size: 2.5rem;
+    margin-bottom: calc(2.5rem * 1.5);
+}
+
+#projects h3 {
+    color: var(--orange)
+}
+
+#projects h4 {
+    color: var(--teal);
+    font-size: 1rem;
+    font-family: var(--mono);
+    margin: 0;
+}
+
+
+#projects div {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blackbox {
+    background-color: var(--blackish);
+    padding: 1rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+#projects ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+    font-size: 1rem;
+
+}
+
+#projects img {
+    margin: 2rem 0 4rem 0;
+    border-left: 1px solid var(--orange);
+    border-top: 1px solid var(--orange);
+    border-radius: 25px;
+    padding: 1rem;
+}
+
+@media (min-width: 550px) {
+    article {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 1rem;
+    }
+
+    #projects img {
+        grid-column: 1/6;
+        grid-row: 1/2;
+    }
+
+    .text-container {
+        grid-column: 5/11;
+        grid-row: 1/2;
+        order: 2;
+        text-align: right;
+    }
+
+    #projects ul {
+        justify-content: flex-end;
+    }
 }
 
 @media (min-width: 810px) {
