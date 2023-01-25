@@ -1,13 +1,77 @@
 function printRecords(recordIds) {
-	// TODO
+	const records = [];
+
+	function sortRecordsByName (a, b) {
+		if (a.name < b.name) {
+			return -1;
+		}
+		if (a.name > b.name) {
+			return 1;
+		}
+		return 0;
+	}
+
+	function logRecord(record) {
+		const { name, id, paid} = record;
+		const paymentStatus = paid ? "Paid" : "Not Paid"
+		console.log(`${name} (${id}): ${paymentStatus}`)
+	}
+
+	for(let id of recordIds) {
+		function matchId (student) {
+			return student.id == id
+		}
+
+		let found = studentRecords.find(matchId)
+		
+		if (found) {
+			records.push(found);
+		}
+	}
+
+	records.sort(sortRecordsByName);
+	records.forEach(logRecord)
 }
 
 function paidStudentsToEnroll() {
-	// TODO
+	function hasPaid(student) {
+		return student.paid;
+	}
+	function isNotEnrolled(student) {
+		return !currentEnrollment.includes(student.id)
+	}
+	function getId(student) {
+		return student.id;
+	}
+
+	const paidStudents = studentRecords.filter(hasPaid);
+	const paidNotEnrolled = paidStudents.filter(isNotEnrolled);
+	const paidNotEnrolledIds = paidNotEnrolled.map(getId);
+
+	return [...currentEnrollment, ...paidNotEnrolledIds]
 }
 
 function remindUnpaid(recordIds) {
-	// TODO
+	function hasNotPaid(student) {
+		return !student.paid;
+	}
+
+	function mapIdToStudent (id) {
+		function matchStudent(student) {
+			return student.id == id
+		}
+		return studentRecords.find(matchStudent);
+	}
+
+	function getId(student) {
+		return student.id;
+	}
+
+	const mappedRecords = recordIds.map(mapIdToStudent);
+	const unpaidStudents = mappedRecords.filter(hasNotPaid)
+	const unpaidIds = unpaidStudents.map(getId);
+
+	printRecords(unpaidIds);
 }
 
 
@@ -26,7 +90,7 @@ var studentRecords = [
 	{ id: 375, name: "Sarah", paid: true, },
 	{ id: 867, name: "Greg", paid: false, },
 ];
-
+// DONE
 printRecords(currentEnrollment);
 console.log("----");
 currentEnrollment = paidStudentsToEnroll();
