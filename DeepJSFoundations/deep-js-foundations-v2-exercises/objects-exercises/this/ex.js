@@ -1,4 +1,74 @@
-var deepJS = defineWorkshop();
+var deepJS = {
+	currentEnrollment: [],
+	studentRecords: [],
+	addStudent(id,name,paid) {
+		this.studentRecords.push({ id, name, paid, });
+	},
+	enrollStudent(id) {
+		if (!this.currentEnrollment.includes(id)) {
+			this.currentEnrollment.push(id);
+		}
+	},
+	printCurrentEnrollment() {
+		this.printRecords(this.currentEnrollment);
+	},
+	enrollPaidStudents() {
+		this.currentEnrollment = this.paidStudentsToEnroll();
+		this.printCurrentEnrollment();
+	},
+	remindUnpaidStudents() {
+		this.remindUnpaid(this.currentEnrollment);
+	},
+	getStudentFromId(studentId) {
+		return this.studentRecords.find(matchId);
+
+		// *************************
+
+		function matchId(record) {
+			return (record.id == studentId);
+		}
+	},
+	printRecords(recordIds) {
+		// The getStudentFromId METHOD will lose its 'this' binding as a callback, so EXPLICITY bind 'this'
+		var records = recordIds.map(this.getStudentFromId.bind(this));
+		// This METHOD has no references to 'this' in the definition, so it does NOT need an explicity binding
+		records.sort(this.sortByNameAsc);
+		// See above for sortByNameAsc
+		records.forEach(this.printRecord);
+	},
+	sortByNameAsc(record1,record2){
+		if (record1.name < record2.name) return -1;
+		else if (record1.name > record2.name) return 1;
+		else return 0;
+	},
+	printRecord(record) {
+		console.log(`${record.name} (${record.id}): ${record.paid ? "Paid" : "Not Paid"}`);
+	},
+	paidStudentsToEnroll() {
+		// needToEnroll is a 'this' reliant method, so it needs an explicit binding when used as a CB
+		var recordsToEnroll = this.studentRecords.filter(this.needToEnroll.bind(this));
+		var idsToEnroll = recordsToEnroll.map(this.getStudentId.bind(this));
+
+		return [ ...this.currentEnrollment, ...idsToEnroll ];
+	},
+	needToEnroll(record) {
+		return (record.paid && !this.currentEnrollment.includes(record.id));
+	},
+	getStudentId(record) {
+		return record.id;
+	},
+	remindUnpaid(recordIds) {
+		// notYetPaid is a 'this' reliant method, so it needs an explicit binding as a CB
+		var unpaidIds = recordIds.filter(this.notYetPaid.bind(this));
+
+		this.printRecords(unpaidIds);
+	},
+	notYetPaid(studentId) {
+		var record = this.getStudentFromId(studentId);
+		return !record.paid;
+	}
+
+}
 
 deepJS.addStudent(311,"Frank",/*paid=*/true);
 deepJS.addStudent(410,"Suzy",/*paid=*/true);
@@ -38,101 +108,3 @@ deepJS.remindUnpaidStudents();
 	Bob (664): Not Paid
 	Henry (105): Not Paid
 */
-
-
-// ********************************
-
-function defineWorkshop() {
-	var currentEnrollment = [];
-	var studentRecords = [];
-
-	var publicAPI = {
-		addStudent,
-		enrollStudent,
-		printCurrentEnrollment,
-		enrollPaidStudents,
-		remindUnpaidStudents,
-	};
-	return publicAPI;
-
-
-	// ********************************
-
-	function addStudent(id,name,paid) {
-		studentRecords.push({ id, name, paid, });
-	}
-
-	function enrollStudent(id) {
-		if (!currentEnrollment.includes(id)) {
-			currentEnrollment.push(id);
-		}
-	}
-
-	function printCurrentEnrollment() {
-		printRecords(currentEnrollment);
-	}
-
-	function enrollPaidStudents() {
-		currentEnrollment = paidStudentsToEnroll();
-		printCurrentEnrollment();
-	}
-
-	function remindUnpaidStudents() {
-		remindUnpaid(currentEnrollment);
-	}
-
-	function getStudentFromId(studentId) {
-		return studentRecords.find(matchId);
-
-		// *************************
-
-		function matchId(record) {
-			return (record.id == studentId);
-		}
-	}
-
-	function printRecords(recordIds) {
-		var records = recordIds.map(getStudentFromId);
-
-		records.sort(sortByNameAsc);
-
-		records.forEach(printRecord);
-	}
-
-	function sortByNameAsc(record1,record2){
-		if (record1.name < record2.name) return -1;
-		else if (record1.name > record2.name) return 1;
-		else return 0;
-	}
-
-	function printRecord(record) {
-		console.log(`${record.name} (${record.id}): ${record.paid ? "Paid" : "Not Paid"}`);
-	}
-
-	function paidStudentsToEnroll() {
-		var recordsToEnroll = studentRecords.filter(needToEnroll);
-
-		var idsToEnroll = recordsToEnroll.map(getStudentId);
-
-		return [ ...currentEnrollment, ...idsToEnroll ];
-	}
-
-	function needToEnroll(record) {
-		return (record.paid && !currentEnrollment.includes(record.id));
-	}
-
-	function getStudentId(record) {
-		return record.id;
-	}
-
-	function remindUnpaid(recordIds) {
-		var unpaidIds = recordIds.filter(notYetPaid);
-
-		printRecords(unpaidIds);
-	}
-
-	function notYetPaid(studentId) {
-		var record = getStudentFromId(studentId);
-		return !record.paid;
-	}
-}
