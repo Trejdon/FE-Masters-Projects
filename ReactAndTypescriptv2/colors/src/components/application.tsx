@@ -1,19 +1,25 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
+import { colorReducer, initialState } from '../color-reducer';
 import SavedColors from './saved-colors';
 import RelatedColors from './related-colors';
 import AdjustColors from './adjust-colors';
 import ColorPicker from './color-picker';
 
 const Application = () => {
-  const [hexColor, setHexColor] = useState('#e56e24');
+  const [{ hexColor }, dispatch] = useReducer(colorReducer, initialState);
 
   return (
-    <div className="grid max-w-3xl grid-cols-1 gap-8 p-8 pb-40 mx-auto dark:bg-slate-900 dark:text-white sm:grid-cols-2">
+    <div className="mx-auto grid max-w-3xl grid-cols-1 gap-8 p-8 pb-40 dark:bg-slate-900 dark:text-white sm:grid-cols-2">
       <ColorPicker
         hexColor={hexColor}
-        onChange={(e) => setHexColor(e.target.value)}
+        onChange={(e) =>
+          dispatch({
+            type: 'update-hex-color',
+            payload: { hexColor: e.target.value },
+          })
+        }
       />
-      <AdjustColors hexColor={hexColor} />
+      <AdjustColors hexColor={hexColor} dispatch={dispatch} />
       <RelatedColors hexColor={hexColor} />
       <SavedColors hexColor={hexColor} />
     </div>
