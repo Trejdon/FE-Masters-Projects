@@ -1,16 +1,4 @@
-import { rgb } from 'color-convert';
-
-export type UpdateColorAction = {
-  type: 'update-hex-color';
-  payload: {
-    hexColor: string;
-  };
-};
-
-export type UpdateRGBColorAction = {
-  type: 'update-rgb-color';
-  payload: { rbg: [number, number, number] };
-};
+import { cmyk, hsl, hsv, rgb } from 'color-convert';
 
 type ColorState = {
   hexColor: string;
@@ -30,6 +18,18 @@ export const colorReducer = (
   }
   if (action.type === 'update-rgb-color') {
     const hexColor = '#' + rgb.hex(action.payload.rbg);
+    return { ...state, hexColor };
+  }
+  if (action.type === 'update-hsl-color') {
+    const hexColor = '#' + hsl.hex(action.payload.hsl);
+    return { ...state, hexColor };
+  }
+  if (action.type === 'update-hsv-color') {
+    const hexColor = '#' + hsv.hex(action.payload.hsv);
+    return { ...state, hexColor };
+  }
+  if (action.type === 'update-cmyk-color') {
+    const hexColor = '#' + cmyk.hex(action.payload.cmyk);
     return { ...state, hexColor };
   }
 
