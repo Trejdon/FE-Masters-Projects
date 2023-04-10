@@ -12,10 +12,14 @@ type ItemState = {
   unpackedItems: Item[];
   packedItems: Item[];
   add: (name: string) => void;
-  update: (id: string, updates: any) => void;
+  update: (id: string, updates: WithoutId) => void;
   remove: (id: string) => void;
   markAllAsUnpacked: () => void;
 };
+
+// Helpful utility methods when you only need partial types of a parent type
+type PartialItem = Partial<Item>;
+type WithoutId = Omit<PartialItem, 'id'>;
 
 export const ItemsContext = createContext({} as ItemState);
 
@@ -27,8 +31,7 @@ const ItemsProvider = ({ children }: PropsWithChildren) => {
     setItems([...items, item]);
   };
 
-  // TODO: This any will be a problem
-  const update = (id: string, updates: any) => {
+  const update = (id: string, updates: WithoutId) => {
     setItems(updateItem(items, id, updates));
   };
 
