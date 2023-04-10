@@ -3,11 +3,13 @@ import ColorChangeSwatch from '../shared/color-change-swatch';
 type RelatedColorPaletteProps = {
   title: string;
   hexColors: string[];
+  handleClick: Function;
 };
 
 const RelatedColorPalette = ({
   title,
   hexColors,
+  handleClick,
 }: RelatedColorPaletteProps) => {
   return (
     <section>
@@ -19,6 +21,7 @@ const RelatedColorPalette = ({
               key={hexColor}
               hexColor={hexColor}
               className="w-full h-full"
+              onClick={() => handleClick(hexColor)}
             />
           );
         })}

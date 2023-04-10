@@ -10,4 +10,24 @@ type UpdateRGBColorAction = {
   payload: { rbg: [number, number, number] };
 };
 
-type AdjustColorActions = UpdateColorAction | UpdateRGBColorAction;
+type UpdateHSLColorAction = {
+  type: 'update-hsl-color';
+  payload: { hsl: [number, number, number] };
+};
+
+type UpdateHSVColorAction = {
+  type: 'update-hsv-color';
+  payload: { hsv: [number, number, number] };
+};
+
+type UpdateCMYKColorAction = {
+  type: 'update-cmyk-color';
+  payload: { cmyk: [number, number, number, number] };
+};
+
+type AdjustColorActions =
+  | UpdateColorAction
+  | UpdateRGBColorAction
+  | UpdateHSLColorAction
+  | UpdateHSVColorAction
+  | UpdateCMYKColorAction;
