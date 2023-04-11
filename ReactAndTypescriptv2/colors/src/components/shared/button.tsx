@@ -1,28 +1,20 @@
 import clsx from 'clsx';
-import { CSSProperties, MouseEventHandler, PropsWithChildren } from 'react';
+import { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 
-type ButtonProps = {
+type ButtonProps = ComponentPropsWithoutRef<'button'> & {
   variant?: string;
   size?: string;
-  className?: string;
-  style?: CSSProperties;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button = ({
   variant,
   size,
   className,
-  style,
   children,
-  onClick,
+  ...props
 }: PropsWithChildren<ButtonProps>) => {
   return (
-    <button
-      className={clsx(variant, size, className)}
-      onClick={onClick}
-      style={style}
-    >
+    <button className={clsx(variant, size, className)} {...props}>
       {children}
     </button>
   );
