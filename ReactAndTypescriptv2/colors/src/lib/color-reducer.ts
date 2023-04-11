@@ -1,6 +1,6 @@
 import { cmyk, hsl, hsv, rgb } from 'color-convert';
 
-type ColorState = {
+export type ColorState = {
   hexColor: string;
 };
 
@@ -8,7 +8,7 @@ export const initialState: ColorState = {
   hexColor: '#BADA55',
 };
 
-export const colorReducer = (
+const colorReducer = (
   state: ColorState = initialState,
   action: AdjustColorActions,
 ) => {
@@ -35,3 +35,5 @@ export const colorReducer = (
 
   return state;
 };
+
+export default colorReducer;
